@@ -19,8 +19,9 @@
 # Boston, MA 02110-1301, USA.
 #
 
-import numpy
+import numpy as np
 from gnuradio import gr
+import pmt
 
 class ax25_protocol_encode(gr.basic_block):
     """
@@ -32,13 +33,13 @@ class ax25_protocol_encode(gr.basic_block):
             in_sig=None,
             out_sig=None)
 
-            self.message_port_register_out(pmt.intern("out"))
-            self.message_port_register_in(pmt.intern("in"))
-            self.set_msg_handler(pmt.intern("in"), self.handle_message)
+        self.message_port_register_out(pmt.intern("out"))
+        self.message_port_register_in(pmt.intern("in"))
+        self.set_msg_handler(pmt.intern("in"), self.handle_message)
 
-            self.dest_callsign = self.left_shift_call(dcall.ljust(6))
-            self.source_callsign = self.left_shift_call(scall.ljust(6))
-            print self.dest_callsign
+        self.dest_callsign = self.left_shift_call(dcall.ljust(6))
+        self.source_callsign = self.left_shift_call(scall.ljust(6))
+        print self.dest_callsign
 
     def handle_message(self, msg):
         payload = np.concatenate((self.dest_callsign,
