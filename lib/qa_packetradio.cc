@@ -26,11 +26,13 @@
  */
 
 #include "qa_packetradio.h"
+#include "qa_hdlc_framer_ax25.h"
 
 CppUnit::TestSuite *
 qa_packetradio::suite()
 {
   CppUnit::TestSuite *s = new CppUnit::TestSuite("packetradio");
+  s->addTest(gr::packetradio::qa_hdlc_framer_ax25::suite());
 
   return s;
 }

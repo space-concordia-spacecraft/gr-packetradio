@@ -8,6 +8,9 @@
 %include "packetradio_swig_doc.i"
 
 %{
+#include "packetradio/hdlc_framer_ax25.h"
 %}
 
 
+%include "packetradio/hdlc_framer_ax25.h"
+GR_SWIG_BLOCK_MAGIC2(packetradio, hdlc_framer_ax25);

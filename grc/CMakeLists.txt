@@ -16,9 +16,9 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
     packetradio_ax25_protocol_encode.xml
     packetradio_nrzi_encoder.xml
-    packetradio_bell_202_modem.xml DESTINATION share/gnuradio/grc/blocks
+    packetradio_bell_202_modem.xml
+    packetradio_hdlc_framer_ax25.xml DESTINATION share/gnuradio/grc/blocks
 )

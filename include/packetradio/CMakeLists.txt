@@ -22,5 +22,5 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/packetradio
+    hdlc_framer_ax25.h DESTINATION include/packetradio
 )

@@ -26,6 +26,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND packetradio_sources
+    hdlc_framer_ax25_impl.cc
 )
 
 set(packetradio_sources "${packetradio_sources}" PARENT_SCOPE)
@@ -60,6 +61,7 @@ include_directories(${CPPUNIT_INCLUDE_DIRS})
 list(APPEND test_packetradio_sources
     ${CMAKE_CURRENT_SOURCE_DIR}/test_packetradio.cc
     ${CMAKE_CURRENT_SOURCE_DIR}/qa_packetradio.cc
+    ${CMAKE_CURRENT_SOURCE_DIR}/qa_hdlc_framer_ax25.cc
 )
 
 add_executable(test-packetradio ${test_packetradio_sources})
