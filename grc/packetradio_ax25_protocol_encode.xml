@@ -8,11 +8,13 @@
   <param>
     <name>Source Callsign</name>
     <key>scall</key>
+    <value>NOCALL</value>
     <type>string</type>
   </param>
   <param>
     <name>Destination Callsign</name>
     <key>dcall</key>
+    <value>CQ</value>
     <type>string</type>
   </param>
   <sink>

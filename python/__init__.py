@@ -33,4 +33,5 @@ except ImportError:
 # import any pure python here
 from ax25_protocol_encode import ax25_protocol_encode
 from nrzi_encoder import nrzi_encoder
+from bell_202_modem import bell_202_modem
 #

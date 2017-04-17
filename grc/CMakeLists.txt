@@ -19,5 +19,6 @@
 
 install(FILES
     packetradio_ax25_protocol_encode.xml
-    packetradio_nrzi_encoder.xml DESTINATION share/gnuradio/grc/blocks
+    packetradio_nrzi_encoder.xml
+    packetradio_bell_202_modem.xml DESTINATION share/gnuradio/grc/blocks
 )
