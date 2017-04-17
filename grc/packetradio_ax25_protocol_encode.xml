@@ -4,7 +4,7 @@
   <key>packetradio_ax25_protocol_encode</key>
   <category>[packetradio]</category>
   <import>import packetradio</import>
-  <make>packetradio.ax25_protocol_encode($dcall, $scall)</make>
+  <make>packetradio.ax25_protocol_encode($dcall, $scall, $shift_call)</make>
   <param>
     <name>Source Callsign</name>
     <key>scall</key>
@@ -16,6 +16,12 @@
     <key>dcall</key>
     <value>CQ</value>
     <type>string</type>
+  </param>
+  <param>
+    <name>Left Shift Callsign</name>
+    <key>shift_call</key>
+    <value>True</value>
+    <type>bool</type>
   </param>
   <sink>
     <name>in</name>

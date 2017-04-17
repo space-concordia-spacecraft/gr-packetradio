@@ -27,12 +27,15 @@ class ax25_protocol_encode(gr.basic_block):
     """
     docstring for block ax25_protocol_encode
     """
-    def __init__(self, dcall="CQ", scall=""):
+    def __init__(self, dcall="CQ", scall="", shift_call=True):
         gr.basic_block.__init__(self,
             name="ax25_protocol_encode",
             in_sig=None,
             out_sig=None)
 
+        self.shift_callsign = shift_call
+        if self.shift_callsign:
+            print "Callsign shifting enabled"
         self.message_port_register_out(pmt.intern("out"))
         self.message_port_register_in(pmt.intern("in"))
         self.set_msg_handler(pmt.intern("in"), self.handle_message)
@@ -53,8 +56,9 @@ class ax25_protocol_encode(gr.basic_block):
 
     def left_shift_call(self, call):
         tmp = np.fromstring(call, dtype=np.uint8)
-        for char in np.nditer(tmp, op_flags=['readwrite']):
-            char[...] = (char << 1)
+        if self.shift_callsign:
+            for char in np.nditer(tmp, op_flags=['readwrite']):
+                char[...] = (char << 1)
 
         return tmp
 
