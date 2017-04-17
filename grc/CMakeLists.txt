@@ -18,5 +18,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    packetradio_ax25_protocol_encode.xml DESTINATION share/gnuradio/grc/blocks
+    packetradio_ax25_protocol_encode.xml
+    packetradio_nrzi_encoder.xml DESTINATION share/gnuradio/grc/blocks
 )

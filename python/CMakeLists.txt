@@ -31,7 +31,8 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    ax25_protocol_encode.py DESTINATION ${GR_PYTHON_DIR}/packetradio
+    ax25_protocol_encode.py
+    nrzi_encoder.py DESTINATION ${GR_PYTHON_DIR}/packetradio
 )
 
 ########################################################################
@@ -42,3 +43,4 @@ include(GrTest)
 set(GR_TEST_TARGET_DEPS gnuradio-packetradio)
 set(GR_TEST_PYTHON_DIRS ${CMAKE_BINARY_DIR}/swig)
 GR_ADD_TEST(qa_ax25_protocol_encode ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_ax25_protocol_encode.py)
+GR_ADD_TEST(qa_nrzi_encoder ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_nrzi_encoder.py)
