@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<block>
+  <name>ax25_protocol_encode</name>
+  <key>packetradio_ax25_protocol_encode</key>
+  <category>[packetradio]</category>
+  <import>import packetradio</import>
+  <make>packetradio.ax25_protocol_encode($dcall, $scall)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+  <param>
+    <name>AX.25 Protocol Encoder</name>
+    <key>ax25_protocol_encode</key>
+    <type>general</type>
+  </param>
+
+  <!-- Make one 'sink' node per input. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <sink>
+    <name>in</name>
+    <type><!-- e.g. int, float, complex, byte, short, xxx_vector, ...--></type>
+  </sink>
+
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
+  <source>
+    <name>out</name>
+    <type><!-- e.g. int, float, complex, byte, short, xxx_vector, ...--></type>
+  </source>
+</block>
