@@ -27,7 +27,7 @@ class ax25_protocol_encode(gr.basic_block):
     """
     docstring for block ax25_protocol_encode
     """
-    def __init__(self, dcall="CQ", scall="", shift_call=True):
+    def __init__(self, dcall="CQ", scall="", shift_call=True, control=0x03):
         gr.basic_block.__init__(self,
             name="ax25_protocol_encode",
             in_sig=None,
@@ -39,6 +39,7 @@ class ax25_protocol_encode(gr.basic_block):
         self.message_port_register_out(pmt.intern("out"))
         self.message_port_register_in(pmt.intern("in"))
         self.set_msg_handler(pmt.intern("in"), self.handle_message)
+        self.control_byte = control
 
         self.dest_callsign = self.left_shift_call(dcall.ljust(6))
         self.source_callsign = self.left_shift_call(scall.ljust(6))
@@ -48,7 +49,7 @@ class ax25_protocol_encode(gr.basic_block):
         payload = np.concatenate((self.dest_callsign,
             np.array([0x60], dtype=np.uint8),
             self.source_callsign,
-            np.array([0x68, 0x3f, 0xF0], dtype=np.uint8),
+            np.array([0x68, self.control_byte, 0xF0], dtype=np.uint8),
             np.fromstring(pmt.symbol_to_string(msg), dtype=np.uint8)))
 
         self.message_port_pub(pmt.intern("out"), pmt.cons(pmt.to_pmt(len(payload)),
