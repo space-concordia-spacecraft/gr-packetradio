@@ -36,18 +36,35 @@ class bell_202_modem(gr.interp_block):
 
         self.sample_rate = samp_rate
         self.baud_rate = baud
+        self.last_freq = 0
+        self.last_phase = 0
+        self.last_w = 0
 
     def work(self, input_items, output_items):
-    	for j in range(0,len(input_items[0])):
-    		if input_items[0][j] > 0:
-    			freq = 1200
-    		else:
-    			freq = 2200
+        num_samples = 32 * len(input_items[0])
+        x = np.arange(num_samples)
 
-	        x = np.arange(self.sample_rate / self.baud_rate)
-	        values = np.sin(2 * np.pi * freq * x / self.sample_rate)
+        for j in range(0,len(input_items[0])):
+            if input_items[0][j] > 0:
+                freq = 1200.0
+            else:
+                freq = 2200.0
 
-	        for i in range(0, 32):
-	            output_items[0][(j* 32) + i] = values[i]
+            #print freq
+            k = x[(j * 32):((j + 1) * 32)]
+            #print k
+
+            w = (2 * np.pi * freq / self.sample_rate)
+
+            phase = ((j * 32) - 1) * (self.last_w - w) + self.last_phase
+
+            values = np.sin((w * k) + phase)
+
+            self.last_freq = freq
+            self.last_phase = phase
+            self.last_w = w
+
+            for i in range(0, 32):
+                output_items[0][(j* 32) + i] = values[i]
 
         return len(output_items[0])
