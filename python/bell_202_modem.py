@@ -34,6 +34,10 @@ class bell_202_modem(gr.interp_block):
             interp = 32
         )
 
+        if (samp_rate % baud) != 0:
+            print "ERROR: Baud rate needs to be multiple of sample rate."
+            return -1
+
         self.sample_rate = samp_rate
         self.baud_rate = baud
         self.last_freq = 0
@@ -42,7 +46,6 @@ class bell_202_modem(gr.interp_block):
 
     def work(self, input_items, output_items):
         num_samples = 32 * len(input_items[0])
-        x = np.arange(num_samples)
 
         for j in range(0,len(input_items[0])):
             if input_items[0][j] > 0:
@@ -50,21 +53,15 @@ class bell_202_modem(gr.interp_block):
             else:
                 freq = 2200.0
 
-            #print freq
-            k = x[(j * 32):((j + 1) * 32)]
-            #print k
-
+            x = np.arange((j * 32), ((j + 1) * 32))
             w = (2 * np.pi * freq / self.sample_rate)
-
             phase = ((j * 32) - 1) * (self.last_w - w) + self.last_phase
-
-            values = np.sin((w * k) + phase)
+            values = np.sin((w * x) + phase)
 
             self.last_freq = freq
             self.last_phase = phase
             self.last_w = w
 
-            for i in range(0, 32):
-                output_items[0][(j* 32) + i] = values[i]
+            output_items[0][(j * 32):((j + 1) * 32)] = values
 
         return len(output_items[0])
